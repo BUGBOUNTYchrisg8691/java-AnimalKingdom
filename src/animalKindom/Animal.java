@@ -5,7 +5,7 @@
 
 package animalKingdom;
 
-public abstract class Animal {
+abstract class Animal {
     private static int idCounter = 0;
     private int id;
     private String name;
