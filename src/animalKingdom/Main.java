@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
+// import java.util.Collectors;
 
 public class Main
 {
@@ -19,6 +20,20 @@ public class Main
 			}
 		}
 
+		return tmpList;
+	}
+
+	public static List<AbstractAnimal> sortObjects(List<AbstractAnimal> list,CheckAnimal tester)
+	{
+		List<AbstractAnimal> tmpList = new ArrayList<>();
+		for (AbstractAnimal animal : list)
+		{
+			if (tester.test(animal))
+			{
+				tmpList.add(animal);
+			}
+		}
+		tmpList.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
 		return tmpList;
 	}
 
@@ -52,18 +67,17 @@ public class Main
 		// print with lambda expression
 		animals.forEach((animal) -> System.out.println(animal));
 
-		System.out.println("\n*** Sort(descending) ***");
 		// sort(descending)
+		System.out.println("\n*** Sort(descending) ***");
 		animals.sort((a1, a2) -> a2.getYearDiscovered() - a1.getYearDiscovered());
 
 		// Collections.sort(animals, Comparator.reverseOrder());
 
-
 		// print w lambda expression
 		animals.forEach((animal) -> System.out.println(animal.getYearDiscovered()));
 
-		System.out.println("\n*** sort(alphabetically) ***");
 		// sort(alphabetically)
+		System.out.println("\n*** sort(alphabetically) ***");
 		animals.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
 
 		// print w for-in loop
@@ -72,22 +86,22 @@ public class Main
 			System.out.println(animal);
 		}
 
-		System.out.println("\n*** sort by move method ***");
 		// sort(by move method)
+		System.out.println("\n*** sort by move method ***");
 		animals.sort((a1, a2) -> a1.move().compareToIgnoreCase(a2.move()));
 
 		// easy print
 		System.out.println(animals);
 
-		System.out.println("\n*** filter by breath(lungs) ***");
 		// filter by `breaths w lungs`
+		System.out.println("\n*** filter by breath(lungs) ***");
 		List<AbstractAnimal> filteredAnimals = filterAnimals(animals, (animal) -> animal.breath() == "Breaths with lungs...");
 
 		// easy print
 		System.out.println(filteredAnimals);
 
-		System.out.println("\n*** filter by breath(lungs) and discovered(1758) ***");
 		// filter by `breaths w lungs and discovered in 1758`
+		System.out.println("\n*** filter by breath(lungs) and discovered(1758) ***");
 		filteredAnimals = filterAnimals(animals, (animal) -> animal.breath() == "Breaths with lungs..." && animal.getYearDiscovered() == 1758);
 
 		// print w for loop
@@ -96,8 +110,8 @@ public class Main
 			System.out.println(filteredAnimals.get(i));
 		}
 
-		System.out.println("\n*** filter by reproduce(eggs) and breath(lungs) ***");
 		// filter by `lays eggs` and `breaths with lungs`
+		System.out.println("\n*** filter by reproduce(eggs) and breath(lungs) ***");
 		filteredAnimals = filterAnimals(animals, (animal) -> animal.breath() == "Breaths with lungs..." && animal.reproduce() == "Lays eggs...");
 
 		// print with while loop
@@ -108,8 +122,8 @@ public class Main
 			i++;
 		}
 
-		System.out.println("\n*** filter by discovered(1758) and sorted(alphabetically) ***");
 		// filter by `discovered in 1758` and sort(alphabetically)
+		System.out.println("\n*** filter by discovered(1758) and sorted(alphabetically) ***");
 		filteredAnimals = filterAnimals(animals, (animal) -> animal.getYearDiscovered() == 1758);
 		filteredAnimals.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
 
@@ -119,10 +133,15 @@ public class Main
 			System.out.println(animal);
 		}
 
-		System.out.println("\n*** stretch - filter by mammals ***");
-		// stretch - filter by instanceof mammals
+		// stretch - filter by instanceof `mammal` and sort(alphabetically)
+		System.out.println("\n*** stretch - filter by `mammals` and sort(alphabetically) ***");
 		filteredAnimals = filterAnimals(animals, (animal) -> animal instanceof Mammal);
 		filteredAnimals.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
 		System.out.println(filteredAnimals);
+
+		// stretch - filter by instanceof `mammal` and sort(alphabetically) - option 2
+		System.out.println("\n*** stretch - filter by `mammals` and sort(alphabetically) - option 2 ***");
+		List<AbstractAnimal> mammals = sortObjects(animals, (animal) -> animal instanceof Mammal);
+		System.out.println(mammals);
 	}
 }

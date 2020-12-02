@@ -30,7 +30,7 @@ abstract class AbstractAnimal
 	@Override
 	public String toString()
 	{
-		return "\nName: " + name + "\nYear Discovered: " + yearDiscovered + "\nFood: " + food;
+		return "\nName: " + name + "\nYear Discovered: " + yearDiscovered + "\nFood: " + food + "\n" + move() + " " + breath() + " " + reproduce();
 	}
 
 	// getter and setters
