@@ -118,5 +118,11 @@ public class Main
 		{
 			System.out.println(animal);
 		}
+
+		System.out.println("\n*** stretch - filter by mammals ***");
+		// stretch - filter by instanceof mammals
+		filteredAnimals = filterAnimals(animals, (animal) -> animal instanceof Mammal);
+		filteredAnimals.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
+		System.out.println(filteredAnimals);
 	}
 }
